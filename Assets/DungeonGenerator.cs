@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using static DungeonGenerator;
+using static DungeonGeneratorUI;
 
 public partial class DungeonGenerator : MonoBehaviour
 {
@@ -11,6 +11,11 @@ public partial class DungeonGenerator : MonoBehaviour
     /// rooms generated are not equal to totalroomNumber
     /// room does not change to corresponding material
     /// </summary> 
+
+    /// TODO:
+    /// Reset Prefabs with button click
+    /// Use scriptable Object for interpreter instead of scene object
+    
 
     public enum ERoomType
     {
@@ -25,36 +30,30 @@ public partial class DungeonGenerator : MonoBehaviour
     private static ERoomType[,] map;
     private static List<Vector2Int> roomsGenerated;
     private static ILayoutInterpreter layoutInterpreter;
-    private static DungeonInterpreter dungeonInterpreter;
 
     public static void InitializeMap()
     {
-        if (dungeonInterpreter == null)
-        {
-            layoutInterpreter = dungeonInterpreter;
-        }
+        layoutInterpreter = dungeonInterpreter;
 
-        layoutInterpreter.InterpretLayout(map);
-        map = new ERoomType[DungeonGeneratorUI.MapLength, DungeonGeneratorUI.MapWidth];
+        map = new ERoomType[MapLength, MapWidth];
         roomsGenerated = new List<Vector2Int>();
         ResetMap();
     }
 
     private static void ResetMap()
     {
-        for (int x = 0; x < DungeonGeneratorUI.MapLength; x++)
+        for (int x = 0; x < MapLength; x++)
         {
-            for (int y = 0; y < DungeonGeneratorUI.MapWidth; y++)
+            for (int y = 0; y < MapWidth; y++)
             {
                 map[x, y] = ERoomType.free;
             }
         }
 
         roomsGenerated.Clear();
-        GenerateMap();
     }
 
-    private static void GenerateMap()
+    public static void GenerateMap()
     {
         Vector2Int startCoordinates = GetRandomStartCoordinates();
 ;
@@ -68,14 +67,15 @@ public partial class DungeonGenerator : MonoBehaviour
             }
         }
 
+        layoutInterpreter.InterpretLayout(map);
         GenerateSpecialRooms();
         Debug.Log(roomsGenerated.Count);
     }
 
     private static Vector2Int GetRandomStartCoordinates()
     {
-        int randomX = Random.Range(0, DungeonGeneratorUI.MapWidth);
-        int randomY = Random.Range(0, DungeonGeneratorUI.MapLength);
+        int randomX = Random.Range(0, MapWidth);
+        int randomY = Random.Range(0, MapLength);
 
         return new Vector2Int(randomX, randomY);
     }
@@ -113,7 +113,7 @@ public partial class DungeonGenerator : MonoBehaviour
                     continue;
                 }
 
-                if (roomsGenerated.Count >= DungeonGeneratorUI.TotalRoomNumber)
+                if (roomsGenerated.Count >= TotalRoomNumber)
                 {
                     break;
                 }
@@ -145,8 +145,8 @@ public partial class DungeonGenerator : MonoBehaviour
 
     private static void GenerateSpecialRooms()
     {
-        AssignSpecialRooms(DungeonGeneratorUI.ShopRoomNumber, ERoomType.shop);
-        AssignSpecialRooms(DungeonGeneratorUI.MinibossRoomNumber, ERoomType.miniboss);
+        AssignSpecialRooms(ShopRoomNumber, ERoomType.shop);
+        AssignSpecialRooms(MinibossRoomNumber, ERoomType.miniboss);
 
         int bossRoomIndex = roomsGenerated.Count - 1;
         Vector2Int bossRoomCoordinates = roomsGenerated[bossRoomIndex];
@@ -175,7 +175,14 @@ public partial class DungeonGenerator : MonoBehaviour
 
     private static bool ValidateLayout()
     {
-        return roomsGenerated.Count >= DungeonGeneratorUI.TotalRoomNumber;
+        if (roomsGenerated.Count >= TotalRoomNumber)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }        
     }
 
     private static int CheckNearbyRooms(Vector2Int _coordinates)
@@ -210,7 +217,7 @@ public partial class DungeonGenerator : MonoBehaviour
 
     private static bool IsCoordinateInBounds(Vector2Int _coordinate)
     {
-        if (_coordinate.x >= 0 && _coordinate.x < DungeonGeneratorUI.MapLength && _coordinate.y >= 0 && _coordinate.y < DungeonGeneratorUI.MapWidth)
+        if (_coordinate.x >= 0 && _coordinate.x < MapLength && _coordinate.y >= 0 && _coordinate.y < MapWidth)
         {
             return true;
         }

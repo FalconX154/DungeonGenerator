@@ -28,7 +28,9 @@ public sealed class DungeonInterpreter : MonoBehaviour, ILayoutInterpreter
             for (int y = 0; y < currentLayoutWidth; y++)
             {
                 if (currentLayout[x, y] == ERoomType.free)
+                {
                     continue;
+                }
 
                 bool[] hasRoomInDirection = new bool[4];
                 int neighbourCount = GetNeighbourCountAndDirections(ref hasRoomInDirection, new Vector2Int(x, y));
@@ -107,10 +109,10 @@ public sealed class DungeonInterpreter : MonoBehaviour, ILayoutInterpreter
 
         for (int i = 0; i < neighbourCurrentCoordinates.Length; i++)
         {
-            Vector2Int neighbourCoord = _coordinates + neighbourCurrentCoordinates[i];
+            Vector2Int neighbourCoordinates = neighbourCurrentCoordinates[i];
             _hasRoomInDirection[i] = false;
 
-            if (IsCoordinateInBounds(neighbourCoord) && currentLayout[neighbourCoord.x, neighbourCoord.y] != ERoomType.free)
+            if (IsCoordinateInBounds(neighbourCoordinates) && currentLayout[neighbourCoordinates.x, neighbourCoordinates.y] != ERoomType.free)
             {
                 _hasRoomInDirection[i] = true;
                 neighbourCount++;

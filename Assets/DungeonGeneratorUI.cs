@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using static DungeonGenerator;
 
 public class DungeonGeneratorUI : EditorWindow
 {
@@ -12,6 +13,7 @@ public class DungeonGeneratorUI : EditorWindow
     public static int SecretRoomNumber;
     public static int MapLength;
     public static int MapWidth;
+    public static DungeonInterpreter dungeonInterpreter;
 
     [MenuItem("Dungeon/Dungeon Generator")]
 
@@ -25,20 +27,22 @@ public class DungeonGeneratorUI : EditorWindow
         GUILayout.Label("Generate Dungeon", EditorStyles.boldLabel);
 
         GUILayout.Label("Map Size", EditorStyles.boldLabel);
-        EditorGUILayout.IntField("Length: ", MapLength);
-        EditorGUILayout.IntField("Width: ", MapWidth);
+        MapLength = EditorGUILayout.IntField("Length: ", MapLength);
+        MapWidth = EditorGUILayout.IntField("Width: ", MapWidth);
 
         GUILayout.Label("Rooms", EditorStyles.boldLabel);
-        EditorGUILayout.IntField("Total Room Number: ", TotalRoomNumber);
-        EditorGUILayout.IntField("Shop Room Number: ", ShopRoomNumber);
-        EditorGUILayout.IntField("Miniboss Room Number: ", MinibossRoomNumber);
-        EditorGUILayout.IntField("Secret Room Number: ", SecretRoomNumber);
+        TotalRoomNumber = EditorGUILayout.IntField("Total Room Number: ", TotalRoomNumber);
+        ShopRoomNumber = EditorGUILayout.IntField("Shop Room Number: ", ShopRoomNumber);
+        MinibossRoomNumber = EditorGUILayout.IntField("Miniboss Room Number: ", MinibossRoomNumber);
+        SecretRoomNumber = EditorGUILayout.IntField("Secret Room Number: ", SecretRoomNumber);
 
-        EditorGUI.BeginDisabledGroup(TotalRoomNumber < ShopRoomNumber + MinibossRoomNumber + SecretRoomNumber);
+        dungeonInterpreter = EditorGUILayout.ObjectField(dungeonInterpreter, typeof(DungeonInterpreter), true) as DungeonInterpreter;
+
+        EditorGUI.BeginDisabledGroup(TotalRoomNumber < ShopRoomNumber + MinibossRoomNumber + SecretRoomNumber || dungeonInterpreter == null || MapLength * MapWidth < TotalRoomNumber);
         if (GUILayout.Button("Generate Dungeon"))
         {
-            DungeonGenerator.InitializeMap();
-
+            InitializeMap();
+            GenerateMap();
         }
         EditorGUI.EndDisabledGroup();
 
