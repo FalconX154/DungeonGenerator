@@ -3,7 +3,7 @@ using static DungeonGenerator;
 
 public sealed class DungeonSpecialRoom : DungeonRoom
 {
-    [SerializeField] private Renderer objectRenderer;
+    [SerializeField] private Renderer floorRenderer;
     [SerializeField] private MaterialEntry[] materialEntries;
 
     public override void SetRoomType(ERoomType _eRoomType)
@@ -12,7 +12,7 @@ public sealed class DungeonSpecialRoom : DungeonRoom
         {
             if (_eRoomType == materialEntries[i].ERoomType)
             {
-                objectRenderer.sharedMaterial = materialEntries[i].Material;
+                floorRenderer.sharedMaterial = materialEntries[i].Material;
                 break;
             }
         }

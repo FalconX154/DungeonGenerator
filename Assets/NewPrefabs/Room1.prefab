@@ -540,7 +540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1353045242228454654}
-  - component: {fileID: -4220469165339102512}
+  - component: {fileID: 8964449403728998394}
   m_Layer: 0
   m_Name: Room1
   m_TagString: Untagged
@@ -564,7 +564,7 @@ Transform:
   - {fileID: 972156975389914635}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4220469165339102512
+--- !u!114 &8964449403728998394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -573,17 +573,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6694296790606208162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a7d78908f586f94eac759aaf4192c04, type: 3}
+  m_Script: {fileID: 11500000, guid: e91ad306f2895d249bcc9dbd4b5dd85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectRenderer: {fileID: 3865452822280116365}
+  floorRenderer: {fileID: 3865452822280116365}
   materialEntries:
   - ERoomType: 2
-    Material: {fileID: 2100000, guid: e9d91e8a78a929240b4a975a0d1cd177, type: 2}
+    Material: {fileID: 2100000, guid: 65cd238c855cfdf46827c9a4ab83e8a2, type: 2}
   - ERoomType: 3
-    Material: {fileID: 2100000, guid: e24988598156a3243961c849e7a9b882, type: 2}
+    Material: {fileID: 2100000, guid: 47f0b709221978c49a4562579758a61c, type: 2}
   - ERoomType: 4
-    Material: {fileID: 2100000, guid: 7604ec3d21b3582458d36329a9927201, type: 2}
+    Material: {fileID: 2100000, guid: 5fea0ab25bb2aa740a6b4b9fdc8c7bee, type: 2}
 --- !u!1 &8669250694017347286
 GameObject:
   m_ObjectHideFlags: 0

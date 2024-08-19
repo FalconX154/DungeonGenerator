@@ -7,6 +7,17 @@ using static DungeonGeneratorUI;
 
 public partial class DungeonGenerator : MonoBehaviour
 {
+    /// <summary>
+    /// Seed
+    /// Delete Button
+    /// Place Random Prefabs
+    /// </summary>
+     
+    /// TODO:
+    /// tirar random start point
+    /// paramentalizar Random.value
+    /// guardar settings da tool com scriptable maybe
+
     public enum ERoomType
     {
         free,
@@ -28,7 +39,7 @@ public partial class DungeonGenerator : MonoBehaviour
         ResetMap();
     }
 
-    private static void ResetMap()
+    public static void ResetMap()
     {
         for (int x = 0; x < MapLength; x++)
         {
@@ -44,7 +55,7 @@ public partial class DungeonGenerator : MonoBehaviour
     public static void GenerateMap()
     {
         Vector2Int startCoordinates = GetRandomStartCoordinates();
-        ;
+        
         while (true)
         {
             roomsList = GenerateLayout(startCoordinates);
@@ -98,6 +109,11 @@ public partial class DungeonGenerator : MonoBehaviour
                 Vector2Int currentNeighbourCoordinate = neighbourCoordinates[i];
 
                 if (!IsCoordinateInBounds(currentNeighbourCoordinate) || roomsList.Count >= TotalRoomNumber)
+                {
+                    continue;
+                }
+
+                if (Random.value < 0.5f)
                 {
                     continue;
                 }

@@ -23,7 +23,6 @@ public class DungeonGeneratorUI : EditorWindow
 
     void OnGUI()
     {
-        int specialRoomNumber = ShopRoomNumber + MinibossRoomNumber;
         GUILayout.Label("Generate Dungeon", EditorStyles.boldLabel);
 
         EditorGUILayout.Space();
@@ -47,7 +46,7 @@ public class DungeonGeneratorUI : EditorWindow
 
         EditorGUILayout.Space();
 
-        EditorGUI.BeginDisabledGroup(TotalRoomNumber < ShopRoomNumber + MinibossRoomNumber || dungeonInterpreter == null || MapLength * MapWidth < TotalRoomNumber || TotalRoomNumber <= 1 || specialRoomNumber == TotalRoomNumber - 1);
+        EditorGUI.BeginDisabledGroup(TotalRoomNumber < ShopRoomNumber + MinibossRoomNumber || dungeonInterpreter == null || MapLength * MapWidth <= TotalRoomNumber || TotalRoomNumber <= 1 || ShopRoomNumber + MinibossRoomNumber == TotalRoomNumber - 1 || dungeonInterpreter.room1Door == null);
         if (GUILayout.Button("Generate Dungeon"))
         {
             InitializeMap();
@@ -58,24 +57,36 @@ public class DungeonGeneratorUI : EditorWindow
         #region Warnings
         if (TotalRoomNumber < ShopRoomNumber + MinibossRoomNumber)
         {
-            EditorGUILayout.HelpBox("The Total Room Number must be higher than the addition of the special rooms.", MessageType.Warning);
+            EditorGUILayout.HelpBox("The Total Room Number must be higher than the addition of the special rooms!", MessageType.Warning);
         }
+
         if (dungeonInterpreter == null)
         {
-            EditorGUILayout.HelpBox("A scriptable object must be used as an interpreter for the dungeon.", MessageType.Warning);
+            EditorGUILayout.HelpBox("A Scriptable Object must be used as an interpreter for the dungeon!", MessageType.Warning);
         }
-        if (MapLength * MapWidth < TotalRoomNumber)
+
+        if (MapLength * MapWidth <= TotalRoomNumber)
         {
-            EditorGUILayout.HelpBox("The Total Room Number must be equal or smaller than the size of the map.", MessageType.Warning);
+            EditorGUILayout.HelpBox("The Total Room Number must be equal or smaller than the size of the map!", MessageType.Warning);
         }
+
         if (TotalRoomNumber <= 1)
         {
-            EditorGUILayout.HelpBox("The Total Room Number must be higher than 1.", MessageType.Warning);
+            EditorGUILayout.HelpBox("The Total Room Number must be higher than 1!", MessageType.Warning);
         }
-        if (specialRoomNumber == TotalRoomNumber - 1)
+
+        if (ShopRoomNumber + MinibossRoomNumber == TotalRoomNumber - 1)
         {
-            EditorGUILayout.HelpBox("The number of Special Rooms must be lower than the Total Room Number minus 1.", MessageType.Warning);
+            EditorGUILayout.HelpBox("The number of Special Rooms must be lower than the Total Room Number minus 1!", MessageType.Warning);
         }
+
+        if (dungeonInterpreter != null)
+        {
+            if (dungeonInterpreter.room1Door == null || dungeonInterpreter.room2DoorC == null || dungeonInterpreter.room2DoorS == null || dungeonInterpreter.room3Door == null || dungeonInterpreter.room4Door == null)
+            {
+                EditorGUILayout.HelpBox("Your Scriptable Object is missing a Prefab!", MessageType.Warning);
+            }
+        }      
         #endregion
     }
 }

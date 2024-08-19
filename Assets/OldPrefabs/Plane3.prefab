@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4610890767392212406}
   - component: {fileID: 2231702559317663109}
   - component: {fileID: 160980970176539026}
-  - component: {fileID: 5405458774740857342}
+  - component: {fileID: -5644915814683983839}
   m_Layer: 0
   m_Name: Plane3
   m_TagString: Untagged
@@ -107,7 +107,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5405458774740857342
+--- !u!114 &-5644915814683983839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,12 +116,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 979872394246743590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a7d78908f586f94eac759aaf4192c04, type: 3}
+  m_Script: {fileID: 11500000, guid: e91ad306f2895d249bcc9dbd4b5dd85d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectRenderer: {fileID: 2231702559317663109}
-  materialEntries:
-  - ERoomType: 3
-    Material: {fileID: 2100000, guid: e24988598156a3243961c849e7a9b882, type: 2}
-  - ERoomType: 2
-    Material: {fileID: 2100000, guid: e9d91e8a78a929240b4a975a0d1cd177, type: 2}
+  floorRenderer: {fileID: 2231702559317663109}
+  materialEntries: []

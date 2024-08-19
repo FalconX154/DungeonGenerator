@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df18088c5888cd945821eb288f7a2d2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 870e37796ac4b5c429d4f0bf74dc3194, type: 3}
   m_Name: OldDungeonInterpreter
   m_EditorClassIdentifier: 
-  room1Door: {fileID: -1430048035288216045, guid: 6f183f0497a5185469795a6796eccc0e, type: 3}
-  room2DoorC: {fileID: 3458778906851639331, guid: 94d5bbcd56fb6054180da77e5fa385b8, type: 3}
-  room2DoorS: {fileID: 1028744505276133987, guid: 18375069b09b1614ebbeec7c49dcc07c, type: 3}
-  room3Door: {fileID: 5405458774740857342, guid: 1c6700c59c02a6649ae805850dec88c2, type: 3}
-  room4Door: {fileID: 8794868212989637111, guid: f63df09bb1062d74ca4cfccc106e0ec3, type: 3}
+  room1Door: {fileID: 8465885566746834191, guid: 6f183f0497a5185469795a6796eccc0e, type: 3}
+  room2DoorC: {fileID: 2451437377143034308, guid: 94d5bbcd56fb6054180da77e5fa385b8, type: 3}
+  room2DoorS: {fileID: 3461454858043458889, guid: 18375069b09b1614ebbeec7c49dcc07c, type: 3}
+  room3Door: {fileID: -5644915814683983839, guid: 1c6700c59c02a6649ae805850dec88c2, type: 3}
+  room4Door: {fileID: 7030447678795075913, guid: f63df09bb1062d74ca4cfccc106e0ec3, type: 3}
